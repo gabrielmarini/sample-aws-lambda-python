@@ -1,16 +1,12 @@
-import json
 import boto3
 import os
 import logging
-
+import json
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-def lambda_handler(event, context):
-
-    logger.info(json.dumps(event))
-    
+def getSecret():
     aws_region_name = "us-east-1"
     
     # Criação de sessão para recuperar secrets
@@ -43,8 +39,7 @@ def lambda_handler(event, context):
         logger.error(e)
         raise e
 
-    # TODO implement
     return {
-        'statusCode': 200,
-        'body': json.dumps(secret)
+        'secretString': secret,
+        'lambda': secret_json
     }
